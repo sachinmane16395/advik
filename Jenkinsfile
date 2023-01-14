@@ -62,18 +62,18 @@ pipeline {
             stage(' Docker Image Push to Amazon ECR') {
                        steps {
                           script {
-                             withDockerRegistry([credentialsId:'ecr:ap-south-1:awscred', url:"https://026145495181.dkr.ecr.ap-south-1.amazonaws.com"]){
-                             sh """
-                             echo "List the docker images present in local"
-                             docker images
-                             echo "Tagging the Docker Image: In Progress"
-                             docker tag advik:latest 026145495181.dkr.ecr.ap-south-1.amazonaws.com/advik:latest
-                             echo "Tagging the Docker Image: Completed"
-                             echo "Push Docker Image to ECR : In Progress"
-                             docker push 026145495181.dkr.ecr.ap-south-1.amazonaws.com/advik:latest
-                             echo "Push Docker Image to ECR : Completed"
-                             """
-                             }
+                               withDockerRegistry([credentialsId:'ecr:ap-south-1:awscred', url:"https://026145495181.dkr.ecr.ap-south-1.amazonaws.com"]){
+                                              sh """
+                                              echo "List the docker images present in local"
+                                              docker images
+                                              echo "Tagging the Docker Image: In Progress"
+                                              docker tag advik:latest 026145495181.dkr.ecr.ap-south-1.amazonaws.com/advik:latest
+                                              echo "Tagging the Docker Image: Completed"
+                                              echo "Push Docker Image to ECR : In Progress"
+                                              docker push 026145495181.dkr.ecr.ap-south-1.amazonaws.com/advik:latest
+                                              echo "Push Docker Image to ECR : Completed"
+                                              """
+                                              }
                           }
                        }
                     }
