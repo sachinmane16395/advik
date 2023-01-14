@@ -77,5 +77,18 @@ pipeline {
                           }
                        }
                     }
+                    stage('Upload the docker Image to Nexus') {
+                               steps {
+                                  script {
+                                     withCredentials([usernamePassword(credentialsId: 'nexuscred', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]){
+                                     sh 'docker login http://43.205.203.219:8081/repository/advik/ -u admin -p ${PASSWORD}'
+                                     echo "Push Docker Image to Nexus : In Progress"
+                                     sh 'docker tag advik 43.205.203.219:8081/advik:latest'
+                                     sh 'docker push 43.205.203.219:8081/advik'
+                                     echo "Push Docker Image to Nexus : Completed"
+                                     }
+                                  }
+                                }
+                            }
     }
 }
