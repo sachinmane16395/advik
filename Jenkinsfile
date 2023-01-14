@@ -39,6 +39,26 @@ pipeline {
                 echo 'Completed  Building Docker Image'
             }
         }
+        stage('Docker Image Scanning') {
+                    steps {
+                        echo 'Docker Image Scanning Started'
+                        sh 'java -version'
+                        echo 'Docker Image Scanning Started'
+                    }
+                }
+                stage(' Docker push to Docker Hub') {
+                   steps {
+                      script {
+                         withCredentials([string(credentialsId: 'dockercred', variable: 'dockercred')]){
+                         sh 'docker login docker.io -u sachin163 -p ${dockercred}'
+                         echo "Push Docker Image to DockerHub : In Progress"
+                         sh 'docker push sachin163/advik:latest'
+                         echo "Push Docker Image to DockerHub : In Progress"
+                         sh 'whoami'
+                         }
+                      }
+                    }
+                }
 
     }
 }
