@@ -26,7 +26,7 @@ pipeline {
         }
         stage('Code Quality Check') {
             steps {
-                echo 'code packing is starting'
+                echo 'code packig is starting'
                 sh 'java --version'
 				echo 'code packing is completed'
             }
