@@ -46,20 +46,7 @@ pipeline {
                 echo 'Docker Image Scanning Started'
             }
         }
-        stage(' Docker push to Docker Hub') {
-           steps {
-              script {
-                 withCredentials([string(credentialsId: 'dockercred', variable: 'dockercred')]){
-                 sh 'docker login docker.io -u sachin163 -p ${dockerCred}'
-                 echo "Push Docker Image to DockerHub : In Progress"
-                 sh 'docker push sachin163/advik:latest'
-                 echo "Push Docker Image to DockerHub : In Progress"
-                 sh 'whoami'
-                 }
-              }
-            }
-        }
-        stage(' Docker Image Push to Amazon ECR') {
+               stage(' Docker Image Push to Amazon ECR') {
            steps {
               script {
                  withDockerRegistry([credentialsId:'ecr:ap-south-1:awscred', url:"https://026145495181.dkr.ecr.ap-south-1.amazonaws.com"]){
